@@ -384,9 +384,9 @@ class Nude(object):
         # 将图像中的皮肤像素设为白色，其余设为黑色
         for pixel in self.skin_map:
             if pixel.id not in skinIdSet:
-                simageData[pixel.x, pixel.y] = 0, 0, 0
+                simageData[pixel.x, pixel.y] = 255, 0, 0
             else:
-                simageData[pixel.x, pixel.y] = 255, 255, 255
+                simageData[pixel.x, pixel.y] = 255, 255, 0
         # 源文件绝对路径
         filePath = os.path.abspath(self.image.filename)
         # 源文件所在目录
