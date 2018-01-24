@@ -1,12 +1,11 @@
 from PIL import Image
 from images import resize
 import os
+import numpy as np
 
 image = Image.open('sources/zhanqian.png')
 pixels = image.load()
 width, height = image.size
-print(width)
-print(height)
 
 #存储相对应的色彩值
 colors = [];
@@ -25,6 +24,7 @@ print(colors)
 
 #处理逻辑
 def getPixels(r,g,b):
+
     rgb_classifier = r > 95 and \
                      g > 40 and g < 100 and \
                      b > 20 and \
@@ -33,6 +33,17 @@ def getPixels(r,g,b):
                      r > g and \
                      r > b
     return rgb_classifier
+
+def getColors(r,g,b):
+    #检测元素离哪个颜色最近
+    vars = []
+    for x in colors:
+        var = np.array([x, (r, g, b)])
+        vars.append(var)
+    # 获取最小值
+    index = np.min(vars)
+    return index
+
 
 new_image = image
 
@@ -43,11 +54,10 @@ for x in range(width):
         r = pixels[x, y][0]  # red
         g = pixels[x, y][1]  # green
         b = pixels[x, y][2]  # blue
-        is_skin = getPixels(r,g,b)
-        if is_skin :
-            new_image_data[x, y] = 0,0,0
-        else:
-            new_image_data[x, y] = 255,255,255
+        index = getPixels(r,g,b)
+
+        new_image_data[x, y] = colors[index]
+
 
 # 源文件绝对路径
 filePath = os.path.abspath(image.filename)
