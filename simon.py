@@ -38,10 +38,10 @@ def getColors(r,g,b):
     #检测元素离哪个颜色最近
     vars = []
     for x in colors:
-        var = np.array([x, (r, g, b)])
+        var = np.var([x, (r, g, b)])
         vars.append(var)
     # 获取最小值
-    index = np.min(vars)
+    index = np.argmin(vars)
     return index
 
 
@@ -54,8 +54,7 @@ for x in range(width):
         r = pixels[x, y][0]  # red
         g = pixels[x, y][1]  # green
         b = pixels[x, y][2]  # blue
-        index = getPixels(r,g,b)
-
+        index = getColors(r,g,b)
         new_image_data[x, y] = colors[index]
 
 
