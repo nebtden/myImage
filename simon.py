@@ -12,16 +12,24 @@ colors = [];
 
 #对于对应的色彩值
 r, g, b = 0, 0, 0
-for x in range(9):
-    if x==0:
-        r,g,b = 0,0,0
-    else:
-        r, g, b = 32 * x - 1, 32 * x - 1, 32 * x - 1
-    print(r,g,b)
-    colors.append((r,g,b))
+# for x in range(9):
+#     if x==0:
+#         r,g,b = 0,0,0
+#     else:
+#         r, g, b = 32 * x - 1, 32 * x - 1, 32 * x - 1
+#     print(r,g,b)
+#     colors.append((r,g,b))
+
+
+colors.append((243,156,18))
+colors.append((60,141,188))
+colors.append((34,45,50))
+colors.append((15,213,181))
+colors.append((83,173,45))
+colors.append((239,189,183))
+colors.append((227,193,183))
 
 print(colors)
-
 #处理逻辑
 def getPixels(r,g,b):
 
