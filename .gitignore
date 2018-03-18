@@ -1,2 +1,5 @@
 /.idea
 /.ipynb_checkpoints
+/mnist/MNIST_DATA
+/mnist/test
+/imagenet-vgg-verydeep-19.mat
