@@ -7,7 +7,7 @@ def contours(img):
     dst = cv.GaussianBlur(img, (3, 3), 0)
     # 转换为灰度图像
     gray = cv.cvtColor(dst, cv.COLOR_RGB2GRAY)
-    cv.imshow("def1",gray)
+    cv.imshow("gray",gray)
     # 转换为二值图像
     ret, binary = cv.threshold(gray, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU)
     cv.imshow("bi", binary)
@@ -18,8 +18,8 @@ def contours(img):
     cv.imshow("contpurs", img)
 
 
-src = cv.imread("../sources/zhangzhen.jpg")
-cv.imshow('def', src)
+src = cv.imread("../sources/wu.jpg")
+cv.imshow('origin', src)
 contours(src)
 cv.waitKey(0)
 cv.destroyAllWindows()
