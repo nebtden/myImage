@@ -2,8 +2,9 @@ from PIL import Image
 from images import resize
 import os
 import numpy as np
+import struct
 
-image = Image.open('sources/zhanqian.png')
+image = Image.open('sources/rain-princess.jpg')
 pixels = image.load()
 width, height = image.size
 
@@ -20,16 +21,22 @@ r, g, b = 0, 0, 0
 #     print(r,g,b)
 #     colors.append((r,g,b))
 
+colors.append((176,70,0))
+colors.append((14,25,45))
+colors.append((40,19,50))
+colors.append((119,52,35))
+colors.append((169,49,15))
+colors.append((198,218,191))
+colors.append((143,200,149))
+colors.append((231,183,137))
+colors.append((47,53,101))
 
-colors.append((243,156,18))
-colors.append((60,141,188))
-colors.append((34,45,50))
-colors.append((15,213,181))
-colors.append((83,173,45))
-colors.append((239,189,183))
-colors.append((227,193,183))
+#根据rgb转颜色
+def hex2rgb(hex_str):
+    int_tuple = struct.unpack('BBB', bytes.fromhex(hex_str))
+    return tuple([val for val in int_tuple])
 
-print(colors)
+
 #处理逻辑
 def getPixels(r,g,b):
 

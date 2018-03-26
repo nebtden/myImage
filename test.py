@@ -28,9 +28,23 @@
 # import tensorflow as tf
 # from tensorflow.contrib.learn.python.learn.datasets.mnist import read_data_sets
 
-import input_data
-mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
+import struct
 
-print(23)
-print(mnist)
+# RGB元素范围(0-1)
+def hex_to_rgb(hex_str):
+    int_tuple = struct.unpack('BBB', bytes.fromhex(hex_str))
+    return tuple([val/255 for val in int_tuple])
 
+print(hex_to_rgb('7BF5BE'))
+
+
+# RGB元素范围(0-255)
+
+# print(hex2rgb('7BF5BE'))
+
+
+def rgb_to_hex(rgb):
+    return '#%02x%02x%02x' % rgb
+
+rgb = (123, 23, 34)
+print(rgb_to_hex(rgb))

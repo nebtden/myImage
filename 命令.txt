@@ -1,0 +1,14 @@
+-- 命令
+python demo.py sources/zhanqian2.jpg demos/demo3.jpg result/zhanqian
+conda install mkl-service
+
+
+
+-- images
+python neural_style.py --help
+python neural_style.py --content <sources/zhanqian2.jpg> --styles <demos/demo3.jpg> --output <result/zhanqian>
+python neural_style.py --content sources/zhangzhen2.jpg --styles demos/demo3.jpg --output result/zhangzhen.jpg  --learning-rate=500
+python neural_style.py --content sources/zhangzhen3.jpg --styles demos/rain.jpg --output result/zhangzhen.jpg  --iterations 1000 --checkpoint-output result/zhangzhen%s.jpg
+
+
+python neural_style.py --content content-images/1-content.jpg --styles styles/1-style.jpg --output result/1-output.jpg
