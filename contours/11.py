@@ -14,14 +14,12 @@ def load_data(file_path):
     f.close()
     return np.mat(data),m,n #以矩阵型式返回data，图片大小
 
-img_data,row,col = load_data("../sources/wu.jpg")
-label = KMeans(n_clusters=3).fit_predict(img_data)  #聚类中心的个数为3
+img_data,row,col = load_data("../sources/rain.jpg")
+label = KMeans(n_clusters=11).fit_predict(img_data)  #聚类中心的个数为3
 label = label.reshape([row,col])    #聚类获得每个像素所属的类别
-print(len(label))
-print(row)
-print(col)
+
 pic_new = image.new("L",(row,col))  #创建一张新的灰度图保存聚类后的结果
 for i in range(row):    #根据所属类别向图片中添加灰度值
     for j in range(col):
         pic_new.putpixel((i,j),int(256/(label[i][j]+1)))
-pic_new.save("../sources/wu1.jpg")
+pic_new.save("../sources/rain1.jpg")

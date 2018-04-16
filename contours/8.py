@@ -2,7 +2,8 @@ import cv2
 import numpy as np
 
 # img = cv2.imread("D:/lion.jpg", 0)
-img = cv2.imread("../sources/mickey.jpg")
+img = cv2.imread('../sources/mickey_contours.jpg')
+# img = cv2.imread('../sources/mickey2.jpg')
 
 x = cv2.Sobel(img, cv2.CV_16S, 1, 0)
 y = cv2.Sobel(img, cv2.CV_16S, 0, 1)
