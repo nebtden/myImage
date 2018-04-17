@@ -11,7 +11,7 @@ def RandomColor(value):
   return (aa,bb,cc)
 
 
-image = cv2.imread("../sources/wu.jpg")
+image = cv2.imread("../sources/zhanqian.png")
 cv2.imshow("Source", image)
 
 
@@ -26,8 +26,10 @@ cv2.imshow("Source", image)
 imgray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 blurred = cv2.GaussianBlur(imgray, (5, 5), 0)
 cv2.imshow("Gray", imgray)
-edges = cv2.Canny(imageGray, 80, 150)
+edges = cv2.Canny(imgray, 80, 150)
 cv2.imshow("Canny", edges)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 #查找轮廓
 #vector<vector<Point>> contours;
@@ -45,55 +47,59 @@ cv2.imshow("Canny", edges)
 #	drawContours(imageContours,contours,index,Scalar(255),1,8,hierarchy);
 #}
 
-ret, binary = cv.threshold(edges, 0, 255, cv.THRESH_BINARY | cv.THRESH_OTSU)
+ret, binary = cv2.threshold(edges, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 image, contours, hierarchy = cv2.findContours(binary,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-skinCrCbHist = np.zeros((256, 256, 1), dtype = "uint8")
-Mask= cv.CreateImage(cv.GetSize(image), cv.IPL_DEPTH_8U, 3)
-cv.Set(Mask, cv.Scalar(0x00,0x00,0xff))
+skinCrCbHist = np.zeros((256, 256, 1), "uint8")
 index = 0
 compCount = 0
-for x in hierarchy[index][0]
-  cv.drawContours(marks, contours, index, Scalar::all(compCount+1), 1, 8, hierarchy)
-  cv.drawContours(imageContours, contours, index, Scalar(255),1,8,hierarchy);
+for x in hierarchy[index][0]:
+  compCount =compCount+1
+  cv2.drawContours(image,contours,-1,(0,0,255),3)
 
 
-//我们来看一下传入的矩阵marks里是什么东西
-Mat marksShows;
-convertScaleAbs(marks,marksShows);
-imshow("marksShow",marksShows);
-imshow("轮廓",imageContours);
-watershed(image,marks);
 
-//我们再来看一下分水岭算法之后的矩阵marks里是什么东西
-Mat afterWatershed;
-convertScaleAbs(marks,afterWatershed);
-imshow("After Watershed",afterWatershed);
 
-//对每一个区域进行颜色填充
-Mat PerspectiveImage=Mat::zeros(image.size(),CV_8UC3);
-for(int i=0;i<marks.rows;i++)
-{
-	for(int j=0;j<marks.cols;j++)
-	{
-		int index=marks.at<int>(i,j);
-		if(marks.at<int>(i,j)==-1)
-		{
-			PerspectiveImage.at<Vec3b>(i,j)=Vec3b(255,255,255);
-		}
-		else
-		{
-			PerspectiveImage.at<Vec3b>(i,j) =RandomColor(index);
-		}
-	}
-}
-imshow("After ColorFill",PerspectiveImage);
 
-//分割并填充颜色的结果跟原始图像融合
-Mat wshed;
-addWeighted(image,0.4,PerspectiveImage,0.6,0,wshed);
-imshow("AddWeighted Image",wshed);
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
-waitKey();
+# //我们来看一下传入的矩阵marks里是什么东西
+# Mat marksShows;
+# convertScaleAbs(marks,marksShows);
+# imshow("marksShow",marksShows);
+# imshow("轮廓",imageContours);
+# watershed(image,marks);
+#
+# //我们再来看一下分水岭算法之后的矩阵marks里是什么东西
+# Mat afterWatershed;
+# convertScaleAbs(marks,afterWatershed);
+# imshow("After Watershed",afterWatershed);
+#
+# //对每一个区域进行颜色填充
+# Mat PerspectiveImage=Mat::zeros(image.size(),CV_8UC3);
+# for(int i=0;i<marks.rows;i++)
+# {
+# 	for(int j=0;j<marks.cols;j++)
+# 	{
+# 		int index=marks.at<int>(i,j);
+# 		if(marks.at<int>(i,j)==-1)
+# 		{
+# 			PerspectiveImage.at<Vec3b>(i,j)=Vec3b(255,255,255);
+# 		}
+# 		else
+# 		{
+# 			PerspectiveImage.at<Vec3b>(i,j) =RandomColor(index);
+# 		}
+# 	}
+# }
+# imshow("After ColorFill",PerspectiveImage);
+#
+# //分割并填充颜色的结果跟原始图像融合
+# Mat wshed;
+# addWeighted(image,0.4,PerspectiveImage,0.6,0,wshed);
+# imshow("AddWeighted Image",wshed);
+#
+# waitKey();
 
 
 
