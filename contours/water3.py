@@ -11,8 +11,8 @@ def RandomColor(value):
   return (aa,bb,cc)
 
 
-image = cv2.imread("../sources/zhanqian.png")
-cv2.imshow("Source", image)
+image = cv2.imread("water3.jpg")
+# cv2.imshow("Source", image)
 
 
 # Mat imageGray;
@@ -24,12 +24,12 @@ cv2.imshow("Source", image)
 
 # 灰度化，滤波，Canny边缘检测
 imgray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-blurred = cv2.GaussianBlur(imgray, (5, 5), 0)
-cv2.imshow("Gray", imgray)
-edges = cv2.Canny(imgray, 80, 150)
+blurred = cv2.GaussianBlur(imgray, (5, 5), 2)
+# cv2.imshow("Gray", blurred)
+edges = cv2.Canny(blurred, 80, 150)
 cv2.imshow("Canny", edges)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 
 #查找轮廓
 #vector<vector<Point>> contours;
@@ -47,18 +47,28 @@ cv2.destroyAllWindows()
 #	drawContours(imageContours,contours,index,Scalar(255),1,8,hierarchy);
 #}
 
-ret, binary = cv2.threshold(edges, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
-image, contours, hierarchy = cv2.findContours(binary,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
-skinCrCbHist = np.zeros((256, 256, 1), "uint8")
+
+
+# height, width = edges.shape[:2]
+
+# ret, binary = cv2.threshold(edges, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+
+# skinCrCbHist = np.zeros(edges.shape[:2], dtype="uint8")
+
+edges, contours, hierarchy = cv2.findContours(edges,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+imageContours = np.zeros((512,512,3),np.uint8)
+cv2.imshow('empty_img',imageContours)
+empty_img1 =cv2.drawContours(imageContours,contours,-1,(0,255,0),1)
+
+cv2.imshow('skinCrCbHist',empty_img1)
+
+
+
+
 index = 0
 compCount = 0
 for x in hierarchy[index][0]:
-  compCount =compCount+1
-  cv2.drawContours(image,contours,-1,(0,0,255),3)
-
-
-
-
+  print(x)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
