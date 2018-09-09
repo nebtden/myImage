@@ -2,9 +2,10 @@ import numpy as np
 from pandas import *
 import cv2
 import colorsys
+from water import get_countoures
 
-img = cv2.imread('sources/mickey2.jpg')
-print(type(img))
+
+img = cv2.imread('../sources/mickey2.jpg')
 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 # 254,194,62  黄颜色
 # 252,25,34  黄颜色
@@ -35,10 +36,9 @@ kernel = np.ones((2,2),np.uint8)
 cv2.imshow('red1',red)
 
 red = cv2.morphologyEx(red, cv2.MORPH_OPEN, kernel)
+red = get_countoures(red)
 cheng = cv2.morphologyEx(cheng, cv2.MORPH_OPEN, kernel)
 huang = cv2.morphologyEx(huang, cv2.MORPH_OPEN, kernel)
-
-
 
 cv2.imshow('src',img)
 cv2.imshow('red',red)
