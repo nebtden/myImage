@@ -1,6 +1,8 @@
 import numpy as np
 from pandas import *
 import cv2
+import os, sys
+from PIL import Image, ImageSequence
 
 # img = cv2.imread('red.jpg')
 img = cv2.imread('sources/mickey2.jpg')
@@ -29,10 +31,11 @@ black = np.ones(img.shape)
 print(type(contours))
 print(type(contours[0]))
 print(len(contours))
+black = np.ones(img.shape)
 for x in range(len(contours)):
     filename = str(x)
     print(filename)
-    black = np.ones(img.shape)
+
     M = cv2.moments(contours[x])
     cx = int(M['m10'] / M['m00'])
     cy = int(M['m01'] / M['m00'])
@@ -48,11 +51,11 @@ for x in range(len(contours)):
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
     imag = cv2.drawContours(black, contours, x, (0, 255, 0), 1)
 
-    cv2.imwrite('./result/'+filename+'.jpg', imag)
 
-#划分颜色区块，从左上角划线起。按颜色，一个个画。如果左上角有一个颜色，则不再区分
-#默认所有颜色为黑色，黑色做两次区分
 
+
+
+cv2.imwrite('./result/black.jpg', imag)
 
 print(len(contours))
 cnt = contours[1]
