@@ -33,8 +33,10 @@ print(type(contours[0]))
 print(len(contours))
 black = np.ones(img.shape)
 for x in range(len(contours)):
-    filename = str(x)
-    print(filename)
+    index = str(x)
+    print(index)
+
+    #根据不同的类型，选择不同的颜色
 
     M = cv2.moments(contours[x])
     cx = int(M['m10'] / M['m00'])
@@ -47,7 +49,7 @@ for x in range(len(contours)):
         continue
     print(area)
     # cv2.circle(image, (cx, cy), 7, (0, 255, 0), -1)
-    cv2.putText(black, filename, (cx, cy),
+    cv2.putText(black, index, (cx, cy),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
     imag = cv2.drawContours(black, contours, x, (0, 255, 0), 1)
 

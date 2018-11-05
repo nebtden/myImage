@@ -3,5 +3,5 @@
 C:\ProgramData\Anaconda3\Scripts\activate tensorflow
 C:\ProgramData\Anaconda3\Scripts\deactivate
 
-
-c:\windows\system32\cmd.exe  - active C:\Users\Administrator\Anaconda3\envs\image
+公司电脑配置
+C:\Users\Administrator\Anaconda3\Scripts\activate   C:\Users\Administrator\Anaconda3\envs\image
