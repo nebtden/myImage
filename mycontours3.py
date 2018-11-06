@@ -20,6 +20,7 @@ print(img.shape)
 
 
 imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+hsv_img = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 ret,thresh = cv2.threshold(imgray,127,255,0)
 image ,contours,hierarchy = cv2.findContours(thresh,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
 # cv2.contourArea
@@ -50,7 +51,8 @@ for x in range(len(contours)):
 
 
     #根据中心点的坐标，获取颜色
-    color = img[cx][cy]
+    color = hsv_img[cx][cy]
+    print(cx,cy)
     print(color)
 
     # print(index)

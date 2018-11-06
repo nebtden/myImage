@@ -3,11 +3,16 @@
 
 from core.simple_color import  getcolorindex
 import numpy as np
+import cv2
 
-x = [0,45,100]
-index = getcolorindex(x)
-print(index)
+img = np.zeros((300,512,3),np.uint8)
 
-x = [-1,45,100]
-result = x>[0,46,100]
-print(result)
+img[:] = [255,255,255]
+cv2.imshow('src',img)
+while(1):
+    # cv2.imshow('img',img)
+    # cv2.imshow('imgray',imgray)
+    # cv2.imshow('image',image)
+    # cv2.imshow('imag',imag)
+    if cv2.waitKey(1) == ord('q'):
+        break
