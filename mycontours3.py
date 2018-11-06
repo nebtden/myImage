@@ -2,11 +2,12 @@ import numpy as np
 from pandas import *
 import cv2
 import os, sys
-from PIL import Image, ImageSequence
+from core.simple_color import getcolorindex
 
 # img = cv2.imread('red.jpg')
 img = cv2.imread('sources/mickey2.jpg')
-# print(type(img))
+print(type(img))
+print(img.shape)
 # size = img.shape
 # a = img.reshape(size[0]*size[1],3)
 # print(a.shape)
@@ -32,26 +33,40 @@ print(type(contours))
 print(type(contours[0]))
 print(len(contours))
 black = np.ones(img.shape)
+black[:] = [255,255,255]
 for x in range(len(contours)):
-    index = str(x)
-    print(index)
+
+
 
     #根据不同的类型，选择不同的颜色
 
     M = cv2.moments(contours[x])
     cx = int(M['m10'] / M['m00'])
     cy = int(M['m01'] / M['m00'])
-    print(cx,cy)
+    # print(M)
+    # print(cx,cy)
+
+    index = str(x)
+
+
+    #根据中心点的坐标，获取颜色
+    color = img[cx][cy]
+    print(color)
+
+    # print(index)
+    index = str(getcolorindex(color))
+    print(index)
+
 
     # 计算轮廓所包含的面积
     area = cv2.contourArea(contours[x])
     if area < 400:
         continue
-    print(area)
+    # print(area)
     # cv2.circle(image, (cx, cy), 7, (0, 255, 0), -1)
     cv2.putText(black, index, (cx, cy),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
-    imag = cv2.drawContours(black, contours, x, (0, 255, 0), 1)
+                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+    imag = cv2.drawContours(black, contours, x, (0, 0, 0), 1)
 
 
 
