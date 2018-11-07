@@ -7,7 +7,7 @@ import numpy as np
 #  0红 1橙 2黄 3绿 4青 5蓝 6紫
 colors = [];
 colors.append([[-10,50,50],[10,255,255]]) # 0红
-colors.append([[11,50,50],[25,255,255]])  # 1红
+colors.append([[11,50,50],[25,255,255]])  # 1 橙子
 colors.append([[26,50,50],[34,255,255]])
 colors.append([[35,50,50],[77,255,255]])
 colors.append([[78,50,50],[99,255,255]])

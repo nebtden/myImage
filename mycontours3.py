@@ -6,6 +6,7 @@ from core.simple_color import getcolorindex
 
 # img = cv2.imread('red.jpg')
 img = cv2.imread('sources/mickey2.jpg')
+rgb_img = img[..., ::-1]
 print(type(img))
 print(img.shape)
 # size = img.shape
@@ -35,6 +36,8 @@ print(type(contours[0]))
 print(len(contours))
 black = np.ones(img.shape)
 black[:] = [255,255,255]
+white = np.ones(img.shape)
+white[:] = [255,255,255]
 for x in range(len(contours)):
 
 
@@ -47,18 +50,23 @@ for x in range(len(contours)):
     # print(M)
     # print(cx,cy)
 
-    index = str(x)
-
 
     #根据中心点的坐标，获取颜色
-    color = hsv_img[cx][cy]
-    print(cx,cy)
-    print(color)
+    color = hsv_img[cy,cx]
+    bgr = img[cy,cx]
+    rgb = rgb_img[cy,cx]
 
     # print(index)
-    index = str(getcolorindex(color))
-    print(index)
+    index = getcolorindex(color)
 
+    with open("output.txt", 'a') as f:
+        f.write(str(cx)+' ' + str(cy) +' '+ "\n")
+        f.write(str(x)+ "\n")
+        f.write(str(index) + "\n")
+        f.write(str(rgb) + "\n")
+        f.write(str(bgr) + "\n")
+        f.write(str(color) + "\n")
+        f.write("\n")
 
     # 计算轮廓所包含的面积
     area = cv2.contourArea(contours[x])
@@ -66,15 +74,17 @@ for x in range(len(contours)):
         continue
     # print(area)
     # cv2.circle(image, (cx, cy), 7, (0, 255, 0), -1)
-    cv2.putText(black, index, (cx, cy),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
-    imag = cv2.drawContours(black, contours, x, (0, 0, 0), 1)
+    cv2.putText(black, str(index), (cx, cy),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+    cv2.putText(white, str(x), (cx, cy), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
+    black_img = cv2.drawContours(black, contours, x, (0, 0, 0), 1)
+    white_img = cv2.drawContours(white, contours, x, (0, 0, 0), 1)
 
 
 
 
 
-cv2.imwrite('./result/black.jpg', imag)
+cv2.imwrite('./result/black.jpg', black_img)
+cv2.imwrite('./result/white.jpg', white_img)
 
 print(len(contours))
 cnt = contours[1]
@@ -93,7 +103,7 @@ cv2.imshow('src',thresh)
 # cv2.imwrite('img_cv2.jpg', imggray)
 cv2.startWindowThread() #加在这个位置
 
-# cv2.imshow('src',img)
+cv2.imshow('src',img)
 
 cv2.waitKey()
 cv2.destroyAllWindows()
