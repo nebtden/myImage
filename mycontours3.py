@@ -5,7 +5,7 @@ import os, sys
 from core.simple_color import getcolorindex
 
 # img = cv2.imread('red.jpg')
-img = cv2.imread('sources/mickey2.jpg')
+img = cv2.imread('sources/color.jpeg')
 rgb_img = img[..., ::-1]
 print(type(img))
 print(img.shape)
@@ -41,10 +41,13 @@ white[:] = [255,255,255]
 for x in range(len(contours)):
 
 
-
+    black_img = cv2.drawContours(black, contours, x, (0, 0, 0), 1)
+    white_img = cv2.drawContours(white, contours, x, (0, 0, 0), 1)
     #根据不同的类型，选择不同的颜色
 
     M = cv2.moments(contours[x])
+    if (M['m00'] == 0.0):
+        continue
     cx = int(M['m10'] / M['m00'])
     cy = int(M['m01'] / M['m00'])
     # print(M)
@@ -76,14 +79,13 @@ for x in range(len(contours)):
     # cv2.circle(image, (cx, cy), 7, (0, 255, 0), -1)
     cv2.putText(black, str(index), (cx, cy),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
     cv2.putText(white, str(x), (cx, cy), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1)
-    black_img = cv2.drawContours(black, contours, x, (0, 0, 0), 1)
-    white_img = cv2.drawContours(white, contours, x, (0, 0, 0), 1)
 
 
 
 
 
-cv2.imwrite('./result/black.jpg', black_img)
+
+cv2.imwrite('./result/color3.jpg', black_img)
 cv2.imwrite('./result/white.jpg', white_img)
 
 print(len(contours))

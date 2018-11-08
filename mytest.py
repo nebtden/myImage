@@ -1,18 +1,22 @@
-#!/usr/bin/env python3.5
-# -*- coding: utf-8 -*-
-
-from core.simple_color import  getcolorindex
 import numpy as np
+from pandas import *
 import cv2
+import os, sys
+from core.simple_color import getcolorindex
 
-img = np.zeros((300,512,3),np.uint8)
+# img = cv2.imread('red.jpg')
+img = cv2.imread('sources/mickey2.jpg')
+rgb_img = img[..., ::-1]
+imgray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+hsv_img = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
+ret,thresh = cv2.threshold(imgray,127,255,0)
 
-img[:] = [255,255,255]
-cv2.imshow('src',img)
-while(1):
-    # cv2.imshow('img',img)
-    # cv2.imshow('imgray',imgray)
-    # cv2.imshow('image',image)
-    # cv2.imshow('imag',imag)
-    if cv2.waitKey(1) == ord('q'):
-        break
+
+for x in list(range(10)):
+    old = x
+    x = old+562
+    y = old+665
+    print(img[y,x])
+    print(rgb_img[y,x])
+    print(hsv_img[y,x])
+    print("\n")
