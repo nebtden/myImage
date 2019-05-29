@@ -127,8 +127,7 @@ def main():
         style_scale = STYLE_SCALE
         if options.style_scales is not None:
             style_scale = float(options.style_scales[i])
-        style_images[i] = skimage.transform.resize(style_images[i], 
-                target_shape )
+
 
     style_blend_weights = options.style_blend_weights
     if style_blend_weights is None:
