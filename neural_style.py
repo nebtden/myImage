@@ -126,7 +126,7 @@ def main():
         style_scale = STYLE_SCALE
         if options.style_scales is not None:
             style_scale = options.style_scales[i]
-        style_images[i] = scipy.misc.imresize(style_images[i], style_scale *
+        style_images[i] = imageio.imresize(style_images[i], style_scale *
                 target_shape[1] / style_images[i].shape[1])
 
     style_blend_weights = options.style_blend_weights
