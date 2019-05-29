@@ -126,7 +126,7 @@ def main():
     for i in range(len(style_images)):
         style_scale = STYLE_SCALE
         if options.style_scales is not None:
-            style_scale = options.style_scales[i]
+            style_scale = float(options.style_scales[i])
         style_images[i] = skimage.transform.resize(style_images[i], style_scale *
                 target_shape / style_images[i].shape)
 
