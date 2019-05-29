@@ -14,6 +14,7 @@ from argparse import ArgumentParser
 
 from PIL import Image
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 # default arguments
 CONTENT_WEIGHT = 5e0
 CONTENT_WEIGHT_BLEND = 1
