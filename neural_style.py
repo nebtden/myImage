@@ -8,6 +8,7 @@ import scipy.misc
 from stylize import stylize
 
 import math
+import imageio
 from argparse import ArgumentParser
 
 from PIL import Image
@@ -188,7 +189,7 @@ def main():
 
 
 def imread(path):
-    img = scipy.misc.imread(path).astype(np.float)
+    img = imageio.imread(path).astype(np.float)
     if len(img.shape) == 2:
         # grayscale
         img = np.dstack((img,img,img))
