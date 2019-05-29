@@ -127,9 +127,8 @@ def main():
         style_scale = STYLE_SCALE
         if options.style_scales is not None:
             style_scale = options.style_scales[i]
-        style_images[i] = skimage.transform.resize(style_images[i], (style_scale *
-                target_shape[0] / style_images[i].shape[0],style_scale *
-                target_shape[1] / style_images[i].shape[1]))
+        style_images[i] = skimage.transform.resize(style_images[i], style_scale *
+                target_shape / style_images[i].shape)
 
     style_blend_weights = options.style_blend_weights
     if style_blend_weights is None:
@@ -191,7 +190,7 @@ def main():
 
 
 def imread(path):
-    img = imageio.imread(path).astype(np.float)
+    img = skimage.io.imread(path)
     if len(img.shape) == 2:
         # grayscale
         img = np.dstack((img,img,img))
